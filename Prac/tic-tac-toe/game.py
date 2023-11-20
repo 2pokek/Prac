@@ -1,4 +1,4 @@
-from players import HumanPlayer, RandomComputerPlayer
+from players import HumanPlayer, RandomComputerPlayer, AIPlayer
 
 
 class TikTacToe:
@@ -85,7 +85,18 @@ def play(game, x_player, o_player, print_game=True):
 
 
 if __name__ == '__main__':
-    x_player = HumanPlayer('X')
-    o_player = RandomComputerPlayer('O')
-    t = TikTacToe()
-    play(t, x_player, o_player, print_game=True)
+    Ai_wins = 0
+    random_wins = 0
+    num_ties = 0
+    for _ in range(1000):
+        x_player = RandomComputerPlayer('X')
+        o_player = AIPlayer('O')
+        t = TikTacToe()
+        res = play(t, x_player, o_player, print_game=True)
+        if res == "O":
+            Ai_wins += 1
+        elif res == "X":
+            random_wins += 1
+        else:
+            num_ties += 1
+    print(num_ties,Ai_wins,random_wins)
